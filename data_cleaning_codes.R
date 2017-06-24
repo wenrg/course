@@ -18,3 +18,21 @@ df$Street.2 = str_replace_all(df$Street.2,"[^[:alnum:]]", " ")
 # trim leading and trailing space
 df$Street = str_replace_all(df$Street,"^\\s+|\\s+$", "")
 df$Street.2 = str_replace_all(df$Street.2,"^\\s+|\\s+$", "")
+
+# capitalize first letter of the street name
+simpleCap = function(x){
+  s = strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1,1)), 
+        substring(s, 2),
+        sep="", collapse=" ")
+}
+df$Street = sapply(df$Street, simpleCap)
+df$Street.2 = sapply(df$Street.2, simpleCap)
+
+# If the value in Street 2 duplicates the value in Street 1, remove the value in Street 2
+df$Street.2[df$Street==df$Street.2] = ''
+
+# Remove the “Strange HTML column”
+df = df[,1:4]
+
+write.csv(df, file = "clean_data.csv", row.names=F)
