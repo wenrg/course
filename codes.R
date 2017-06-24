@@ -18,7 +18,7 @@ simpleCap = function(x){
         substring(s, 2),
         sep="", collapse=" ")
 }
-sapply(df$Street, simpleCap)
+df$Street = sapply(df$Street, simpleCap)
 
 
 
