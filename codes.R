@@ -1,5 +1,5 @@
 # load data
-df = read.csv('dirty_data.csv', header=T)
+df <- read.csv('dirty_data.csv', header=T)
 
 #Populate the missing values in the Area variable with an appropriate values (Birmingham, Coventry, Dudley, Sandwell, Solihull, Walsall or Wolverhampton)
 fill_area = c('Birmingham', 'Coventry', 'Dudley', 'Sandwell', 'Solihull', 'Walsall', 'Wolverhampton')
@@ -9,4 +9,4 @@ df[2:nrow(df),'Area'] = random_area
 
 
 # Remove the “Strange HTML column”
-remove(list = dirty_data$`Strange HTML`)
+remove(list = df$`Strange HTML`)
