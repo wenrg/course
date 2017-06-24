@@ -1,5 +1,5 @@
 # load data
-df <- read.csv('dirty_data.csv', header=T)
+df = read.csv('dirty_data.csv', header=T)
 
 # Populate the missing values in the Area variable with an appropriate values 
 # (Birmingham, Coventry, Dudley, Sandwell, Solihull, Walsall or Wolverhampton)
@@ -13,9 +13,11 @@ df[2:nrow(df),'Area'] = random_area
 # as “str.”, avenues as “ave.”, etc.
 library("stringr")
 # remove special characters
-df$Street <- str_replace_all(df$Street,"[^[:alnum:]]", " ")
+df$Street = str_replace_all(df$Street,"[^[:alnum:]]", " ")
+df$Street.2 = str_replace_all(df$Street.2,"[^[:alnum:]]", " ")
 # trim leading and trailing space
-df$Street <- str_replace_all(df$Street,"^\\s+|\\s+$", "")
+df$Street = str_replace_all(df$Street,"^\\s+|\\s+$", "")
+df$Street.2 = str_replace_all(df$Street.2,"^\\s+|\\s+$", "")
 # capitalize first letter of the street name
 simpleCap = function(x){
   s = strsplit(x, " ")[[1]]
@@ -24,13 +26,12 @@ simpleCap = function(x){
         sep="", collapse=" ")
 }
 df$Street = sapply(df$Street, simpleCap)
+df$Street.2 = sapply(df$Street.2, simpleCap)
 
 # If the value in Street 2 duplicates the value in Street 1, remove the value in Street 2
-
-
+df$Street.2[df$Street==df$Street.2] = ''
 
 # Remove the “Strange HTML column”
-remove(list = df$`Strange HTML`)
-
+df = df[,1:4]
 
 write.csv(df, file = "clean_data.csv", row.names=F)
