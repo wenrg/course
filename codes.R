@@ -11,6 +11,14 @@ library("stringr")
 df$Street <- str_replace_all(df$Street,"[^[:alnum:]]", " ")
 # trim leading and trailing space
 df$Street <- str_replace_all(df$Street,"^\\s+|\\s+$", "")
+# capitalize first letter of the street name
+simpleCap = function(x){
+  s = strsplit(x, " ")[[1]]
+  paste(toupper(substring(s, 1,1)), 
+        substring(s, 2),
+        sep="", collapse=" ")
+}
+sapply(df$Street, simpleCap)
 
 
 
