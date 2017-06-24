@@ -31,3 +31,6 @@ df$Street = sapply(df$Street, simpleCap)
 
 # Remove the “Strange HTML column”
 remove(list = df$`Strange HTML`)
+
+
+write.csv(df, file = "clean_data.csv", row.names=F)
